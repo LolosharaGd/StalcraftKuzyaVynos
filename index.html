@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кузя вынос!</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="assets\css\style.css">
 </head>
 <body>
     <header class="header">
@@ -15,8 +15,39 @@
         </nav>
     </header>
 
-    <script>
-        
-    </script>
+    <div id="container">
+        <div id="cost-per-piece" oninput="updatePrices()">
+            <p class="column-header">Цена за шт</p>
+            <input type="text" class="input-cell-cpp">
+            <input type="text" class="input-cell-cpp">
+            <input type="text" class="input-cell-cpp">
+            <input type="text" class="input-cell-cpp">
+            <input type="text" class="input-cell-cpp">
+            <input type="text" class="input-cell-cpp">
+            <button class="normal-button" onclick="addPriceRow()">+</button>
+        </div>
+        <div id="amount" oninput="updatePrices()">
+            <p class="column-header">Кол-во</p>
+            <input type="text" class="input-cell-amt">
+            <input type="text" class="input-cell-amt">
+            <input type="text" class="input-cell-amt">
+            <input type="text" class="input-cell-amt">
+            <input type="text" class="input-cell-amt">
+            <input type="text" class="input-cell-amt">
+        </div>
+        <div id="price-for-items">
+            <p class="column-header">Стоимость</p>
+            <input class="output-cell-pri" disabled="true">
+            <input class="output-cell-pri" disabled="true">
+            <input class="output-cell-pri" disabled="true">
+            <input class="output-cell-pri" disabled="true">
+            <input class="output-cell-pri" disabled="true">
+            <input class="output-cell-pri" disabled="true">
+            <p id="pri-sum-text" class="column-header">Сумма</p>
+            <input id="price-sum" class="normal-out-cell" disabled="true">
+        </div>
+    </div>
+
+    <script src="assets\js\main.js"></script>
 </body>
 </html>

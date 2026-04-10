@@ -6,7 +6,7 @@
     <title>Кузя вынос!</title>
     <link rel="stylesheet" href="assets\css\style.css">
 </head>
-<body onload="addPriceRow()">
+<body onload="addPriceRow(); globalLoadCalcPage()">
     <header class="header">
         <nav class="nav">
             <a href="calculations.html" class="nav-item">Расчёты</a>
@@ -16,20 +16,20 @@
     </header>
 
     <div id="calculations-page">
-        <div id="container" oninput="updatePrices()">
+        <div id="container" oninput="updatePrices(); globalSaveCalcPage()">
             <div id="item-names">
                 <p class="column-header">Предмет</p>
-                <p class="column-header" id="last-itn">-</p>
-                <button class="normal-button" onclick="addPriceRow()">+</button>
+                <p class="column-header" id="last-itn">*</p>
+                <button class="normal-button" onclick="addPriceRow(); globalSaveCalcPage()">+</button>
             </div>
             <div id="cost-per-piece">
                 <p class="column-header">Цена за шт</p>
-                <p class="column-header" id="last-cpp">-</p>
-                <button class="normal-button" onclick="removePriceRow()">-</button>
+                <p class="column-header" id="last-cpp">*</p>
+                <button class="normal-button" onclick="removePriceRow(); globalSaveCalcPage()">-</button>
             </div>
             <div id="amount">
                 <p class="column-header">Кол-во</p>
-                <p class="column-header" id="last-amt">-</p>
+                <p class="column-header" id="last-amt">*</p>
             </div>
             <div id="price-for-items">
                 <p class="column-header">Стоимость</p>
@@ -38,7 +38,7 @@
             </div>
             <div id="use-items">
                 <p class="column-header">Считать</p>
-                <p class="column-header" id="last-usi">-</p>
+                <p class="column-header" id="last-usi">*</p>
             </div>
         </div>
     </div>

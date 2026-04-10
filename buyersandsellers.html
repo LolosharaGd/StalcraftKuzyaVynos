@@ -6,7 +6,7 @@
     <title>Кузя вынос!</title>
     <link rel="stylesheet" href="assets\css\style.css">
 </head>
-<body onload="addPriceRow()">
+<body onload="addBNSRow()">
     <header class="header">
         <nav class="nav">
             <a href="calculations.html" class="nav-item">Расчёты</a>
@@ -14,6 +14,34 @@
             <a href="buyersandsellers.html" class="nav-item">Скупщики или продавцы</a>
         </nav>
     </header>
+
+    <div id="bns-page">
+        <div id="container">
+            <div id="nicknames">
+                <p class="column-header">Ник</p>
+                <p class="column-header" id="last-nck">*</p>
+                <button class="normal-button" onclick="addBNSRow()">+</button>
+            </div>
+            <div id="scam-attempts">
+                <p class="column-header">Попытки скама</p>
+                <p class="column-header" id="last-sca">*</p>
+                <button class="normal-button" onclick="removeBNSRow()">-</button>
+            </div>
+            <div id="succesful-trades">
+                <p class="column-header">Успеш. обмены</p>
+                <p class="column-header" id="last-sct">*</p>
+            </div>
+            <div id="trust">
+                <p class="column-header">Доверие</p>
+                <p class="column-header" id="last-tru">*</p>
+            </div>
+            <div id="notes">
+                <p class="column-header-wide">Заметки</p>
+                <p class="column-header-wide" id="last-nts">*</p>
+            </div>
+            <div></div>
+        </div>
+    </div>
 
     <script src="assets\js\main.js"></script>
 </body>

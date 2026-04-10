@@ -2,9 +2,10 @@
 
 :root {
     --normal-input-width: 150px;
-    --normal-input-hor-spacing: 151px;
     --normal-input-height: 22px;
+    --normal-input-hor-spacing: 151px;
     --normal-input-bottom-margin: 3px;
+    --wide-input-width: 301px;
     --color-background: #03030a;
     --color-light: #fafaf8;
     --color-light-hovered: #d1d1d1;
@@ -54,7 +55,10 @@ img {
     }
 }
 
-.normal-button, .normal-in-cell, .normal-out-cell, .input-cell-cpp, .input-cell-amt, .output-cell-pri, .input-cell-itn, .input-cell-usi {
+.normal-button, .normal-in-cell, .normal-out-cell, .input-cell-cpp,
+.input-cell-amt, .output-cell-pri, .input-cell-itn, .input-cell-usi,
+.wide-in-cell, .input-cell-nck, .input-cell-sca, .input-cell-sct,
+.input-cell-tru, .input-cell-nts {
     background-color: var(--color-light);
     width: var(--normal-input-width);
     height: var(--normal-input-height);
@@ -63,7 +67,7 @@ img {
     text-align: center;
     color: var(--color-background);
     margin-bottom: var(--normal-input-bottom-margin);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 .output-cell-pri, .normal-out-cell {
@@ -82,12 +86,16 @@ img {
     background-color: var(--color-light-active);
 }
 
+.wide-in-cell, .input-cell-nts {
+    width: var(--wide-input-width);
+}
+
 #container {
     display: grid;
     grid: 0 / auto-flow var(--normal-input-hor-spacing);
 }
 
-.column-header {
+.column-header, .column-header-wide {
     color: var(--color-light);
     width: var(--normal-input-width);
     display: flex;
@@ -95,7 +103,11 @@ img {
     align-items: center;
 }
 
-#calculations-page {
+.column-header-wide {
+    width: var(--wide-input-width);
+}
+
+#calculations-page, #bns-page {
     display: flex;
     justify-content: center;
     align-content: center;

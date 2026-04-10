@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кузя вынос!</title>
+    <link rel="stylesheet" href="assets\css\style.css">
+</head>
+<body onload="addPriceRow()">
+    <header class="header">
+        <nav class="nav">
+            <a href="calculations.html" class="nav-item">Расчёты</a>
+            <a href="division.html" class="nav-item">Подсчёт и разделение</a>
+            <a href="buyersandsellers.html" class="nav-item">Скупщики или продавцы</a>
+        </nav>
+    </header>
+
+    <div id="calculations-page">
+        <div id="container" oninput="updatePrices()">
+            <div id="item-names">
+                <p class="column-header">Предмет</p>
+                <p class="column-header" id="last-itn">-</p>
+                <button class="normal-button" onclick="addPriceRow()">+</button>
+            </div>
+            <div id="cost-per-piece">
+                <p class="column-header">Цена за шт</p>
+                <p class="column-header" id="last-cpp">-</p>
+                <button class="normal-button" onclick="removePriceRow()">-</button>
+            </div>
+            <div id="amount">
+                <p class="column-header">Кол-во</p>
+                <p class="column-header" id="last-amt">-</p>
+            </div>
+            <div id="price-for-items">
+                <p class="column-header">Стоимость</p>
+                <p id="last-pri" class="column-header">Сумма</p>
+                <input id="price-sum" class="normal-out-cell" disabled="true">
+            </div>
+            <div id="use-items">
+                <p class="column-header">Считать</p>
+                <p class="column-header" id="last-usi">-</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets\js\main.js"></script>
+</body>
+</html>

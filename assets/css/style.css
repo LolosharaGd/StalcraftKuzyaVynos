@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-    --normal-input-width: 100px;
-    --normal-input-hor-spacing: 105px;
+    --normal-input-width: 150px;
+    --normal-input-hor-spacing: 151px;
+    --normal-input-height: 22px;
+    --normal-input-bottom-margin: 3px;
     --color-background: #03030a;
     --color-light: #fafaf8;
     --color-light-hovered: #d1d1d1;
@@ -30,6 +32,7 @@ body {
 
 a {
     text-decoration: none;
+    color: var(--color-light);
 }
 
 img {
@@ -51,13 +54,16 @@ img {
     }
 }
 
-.normal-button, .normal-in-cell, .normal-out-cell, .input-cell-cpp, .input-cell-amt, .output-cell-pri {
+.normal-button, .normal-in-cell, .normal-out-cell, .input-cell-cpp, .input-cell-amt, .output-cell-pri, .input-cell-itn, .input-cell-usi {
     background-color: var(--color-light);
     width: var(--normal-input-width);
+    height: var(--normal-input-height);
     border-radius: 0;
     border: 0;
     text-align: center;
     color: var(--color-background);
+    margin-bottom: var(--normal-input-bottom-margin);
+    font-size: 1.5rem;
 }
 
 .output-cell-pri, .normal-out-cell {
@@ -87,4 +93,10 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#calculations-page {
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }

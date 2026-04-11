@@ -55,10 +55,7 @@ img {
     }
 }
 
-.normal-button, .normal-in-cell, .normal-out-cell, .input-cell-cpp,
-.input-cell-amt, .output-cell-pri, .input-cell-itn, .input-cell-usi,
-.wide-in-cell, .input-cell-nck, .input-cell-sca, .input-cell-sct,
-.input-cell-tru, .input-cell-nts {
+.normal-button, .normal-in-cell, .normal-out-cell, .wide-in-cell {
     background-color: var(--color-light);
     width: var(--normal-input-width);
     height: var(--normal-input-height);
@@ -70,7 +67,7 @@ img {
     font-size: 1.4rem;
 }
 
-.output-cell-pri, .normal-out-cell {
+.normal-out-cell {
     background-color: var(--color-out-cell);
 }
 
@@ -86,7 +83,7 @@ img {
     background-color: var(--color-light-active);
 }
 
-.wide-in-cell, .input-cell-nts {
+.wide-in-cell {
     width: var(--wide-input-width);
 }
 

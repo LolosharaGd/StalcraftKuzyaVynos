@@ -1,8 +1,8 @@
 function updatePrices() {
-    var cppInputs = document.getElementsByClassName("input-cell-cpp");
-    var amtInputs = document.getElementsByClassName("input-cell-amt");
-    var priOutputs = document.getElementsByClassName("output-cell-pri");
-    var usiInputs = document.getElementsByClassName("input-cell-usi");
+    var cppInputs = document.getElementsByClassName("calcp-cpp");
+    var amtInputs = document.getElementsByClassName("calcp-amt");
+    var priOutputs = document.getElementsByClassName("calcp-pri");
+    var usiInputs = document.getElementsByClassName("calcp-usi");
 
     var minElementsCount = Math.min(cppInputs.length, amtInputs.length, priOutputs.length, usiInputs.length);
 
@@ -20,27 +20,27 @@ function updatePrices() {
 function addPriceRow() {
     var newItnCell = document.createElement("input");
     newItnCell.type = "text";
-    newItnCell.className = "input-cell-itn";
+    newItnCell.className = "normal-in-cell calcp-itn";
     newItnCell.value = "";
 
     var newCppCell = document.createElement("input");
     newCppCell.type = "text";
-    newCppCell.className = "input-cell-cpp";
+    newCppCell.className = "normal-in-cell calcp-cpp";
     newCppCell.value = "0";
 
     var newAmtCell = document.createElement("input");
     newAmtCell.type = "text";
-    newAmtCell.className = "input-cell-amt";
+    newAmtCell.className = "normal-in-cell calcp-amt";
     newAmtCell.value = "0";
     
     var newPriCell = document.createElement("input");
     newPriCell.disabled = "true";
-    newPriCell.className = "output-cell-pri";
+    newPriCell.className = "normal-out-cell calcp-pri";
     newPriCell.value = "0";
 
     var newUsiCell = document.createElement("input");
     newUsiCell.type = "checkbox";
-    newUsiCell.className = "input-cell-usi";
+    newUsiCell.className = "normal-in-cell calcp-usi";
     newUsiCell.value = "false";
 
     var lastItn = document.getElementById("last-itn");
@@ -59,11 +59,11 @@ function addPriceRow() {
 }
 
 function removePriceRow() {
-    var itemNames = document.getElementsByClassName("input-cell-itn");
-    var cppInputs = document.getElementsByClassName("input-cell-cpp");
-    var amtInputs = document.getElementsByClassName("input-cell-amt");
-    var priOutputs = document.getElementsByClassName("output-cell-pri");
-    var usiInputs = document.getElementsByClassName("input-cell-usi");
+    var itemNames = document.getElementsByClassName("calcp-itn");
+    var cppInputs = document.getElementsByClassName("calcp-cpp");
+    var amtInputs = document.getElementsByClassName("calcp-amt");
+    var priOutputs = document.getElementsByClassName("calcp-pri");
+    var usiInputs = document.getElementsByClassName("calcp-usi");
 
     document.getElementById("item-names").removeChild(itemNames[itemNames.length - 1]);
     document.getElementById("cost-per-piece").removeChild(cppInputs[cppInputs.length - 1]);
@@ -72,38 +72,59 @@ function removePriceRow() {
     document.getElementById("use-items").removeChild(usiInputs[usiInputs.length - 1]);
 }
 
+function bnsTypeButtonSwitch(el) {
+    if(el.innerHTML == "Скупщик") {
+        el.innerHTML = "Продавец";
+    } else {
+        el.innerHTML = "Скупщик";
+    }
+}
+
 function addBNSRow() {
+    var newTypCell = document.createElement("button");
+    newTypCell.className = "normal-button bnsp-typ";
+    newTypCell.innerHTML = "Скупщик"
+    newTypCell.addEventListener(
+        "click",
+        function() {
+            bnsTypeButtonSwitch(this);
+            globalSaveBNSPage();
+        }
+    );
+
     var newNckCell = document.createElement("input");
     newNckCell.type = "text";
-    newNckCell.className = "input-cell-nck";
+    newNckCell.className = "normal-in-cell bnsp-nck";
     newNckCell.value = "";
 
     var newScaCell = document.createElement("input");
     newScaCell.type = "number";
-    newScaCell.className = "input-cell-sca";
+    newScaCell.className = "normal-in-cell bnsp-sca";
     newScaCell.value = "";
 
     var newSctCell = document.createElement("input");
     newSctCell.type = "number";
-    newSctCell.className = "input-cell-sct";
+    newSctCell.className = "normal-in-cell bnsp-sct";
     newSctCell.value = "";
     
     var newTruCell = document.createElement("input");
-    newTruCell.type = "number";
-    newTruCell.className = "input-cell-tru";
+    newTruCell.type = "text";
+    newTruCell.className = "normal-in-cell bnsp-tru";
     newTruCell.value = "";
 
     var newNtsCell = document.createElement("input");
     newNtsCell.type = "text";
-    newNtsCell.className = "input-cell-nts";
+    newNtsCell.className = "wide-in-cell bnsp-nts";
     newNtsCell.value = "";
 
+    var lastTyp = document.getElementById("last-typ");
     var lastNck = document.getElementById("last-nck");
     var lastSca = document.getElementById("last-sca");
     var lastSct = document.getElementById("last-sct");
     var lastTru = document.getElementById("last-tru");
     var lastNts = document.getElementById("last-nts");
     
+    document.getElementById("bns-type").insertBefore(newTypCell, lastTyp);
     document.getElementById("nicknames").insertBefore(newNckCell, lastNck);
     document.getElementById("scam-attempts").insertBefore(newScaCell, lastSca);
     document.getElementById("succesful-trades").insertBefore(newSctCell, lastSct);
@@ -112,12 +133,14 @@ function addBNSRow() {
 }
 
 function removeBNSRow() {
-    var nckInputs = document.getElementsByClassName("input-cell-nck");
-    var scaInputs = document.getElementsByClassName("input-cell-sca");
-    var sctInputs = document.getElementsByClassName("input-cell-sct");
-    var truInputs = document.getElementsByClassName("input-cell-tru");
-    var ntsInputs = document.getElementsByClassName("input-cell-nts");
+    var typInputs = document.getElementsByClassName("bnsp-typ");
+    var nckInputs = document.getElementsByClassName("bnsp-nck");
+    var scaInputs = document.getElementsByClassName("bnsp-sca");
+    var sctInputs = document.getElementsByClassName("bnsp-sct");
+    var truInputs = document.getElementsByClassName("bnsp-tru");
+    var ntsInputs = document.getElementsByClassName("bnsp-nts");
 
+    document.getElementById("bns-type").removeChild(typInputs[typInputs.length - 1]);
     document.getElementById("nicknames").removeChild(nckInputs[nckInputs.length - 1]);
     document.getElementById("scam-attempts").removeChild(scaInputs[scaInputs.length - 1]);
     document.getElementById("succesful-trades").removeChild(sctInputs[sctInputs.length - 1]);
@@ -126,10 +149,10 @@ function removeBNSRow() {
 }
 
 function globalSaveCalcPage() {
-    var itnInputs = document.getElementsByClassName("input-cell-itn");
-    var cppInputs = document.getElementsByClassName("input-cell-cpp");
-    var amtInputs = document.getElementsByClassName("input-cell-amt");
-    var usiInputs = document.getElementsByClassName("input-cell-usi");
+    var itnInputs = document.getElementsByClassName("calcp-itn");
+    var cppInputs = document.getElementsByClassName("calcp-cpp");
+    var amtInputs = document.getElementsByClassName("calcp-amt");
+    var usiInputs = document.getElementsByClassName("calcp-usi");
 
     var minElementsCount = Math.min(itnInputs.length, cppInputs.length, amtInputs.length, usiInputs.length);
 
@@ -147,23 +170,70 @@ function globalSaveCalcPage() {
 
     var calcPageData = { len: minElementsCount, itn: itnItems, cpp: cppItems, amt: amtItems, usi: usiItems };
 
-    console.log(calcPageData);
+    //console.log(calcPageData);
     localStorage.setItem("calc", JSON.stringify(calcPageData));
 }
 
 function globalLoadCalcPage() {
     var calcPageData = JSON.parse(localStorage.getItem("calc"));
 
-    console.log(calcPageData);
+    //console.log(calcPageData);
 
     for(var i = 0; i < calcPageData.len; i++) {
         addPriceRow();
 
-        document.getElementsByClassName("input-cell-itn")[i].value = calcPageData.itn[i]
-        document.getElementsByClassName("input-cell-cpp")[i].value = calcPageData.cpp[i]
-        document.getElementsByClassName("input-cell-amt")[i].value = calcPageData.amt[i]
-        document.getElementsByClassName("input-cell-usi")[i].checked = Boolean(calcPageData.usi[i]);
+        document.getElementsByClassName("calcp-itn")[i].value = calcPageData.itn[i]
+        document.getElementsByClassName("calcp-cpp")[i].value = calcPageData.cpp[i]
+        document.getElementsByClassName("calcp-amt")[i].value = calcPageData.amt[i]
+        document.getElementsByClassName("calcp-usi")[i].checked = Boolean(calcPageData.usi[i]);
+    }
+}
+
+function globalSaveBNSPage() {
+    var typInputs = document.getElementsByClassName("bnsp-typ");
+    var nckInputs = document.getElementsByClassName("bnsp-nck");
+    var scaInputs = document.getElementsByClassName("bnsp-sca");
+    var sctInputs = document.getElementsByClassName("bnsp-sct");
+    var truInputs = document.getElementsByClassName("bnsp-tru");
+    var ntsInputs = document.getElementsByClassName("bnsp-nts");
+
+    var minElementsCount = Math.min(typInputs.length, nckInputs.length, scaInputs.length, sctInputs.length, truInputs.length, ntsInputs.length);
+
+    var typItems = [];
+    var nckItems = [];
+    var scaItems = [];
+    var sctItems = [];
+    var truItems = [];
+    var ntsItems = [];
+
+    for(var i = 0; i < minElementsCount; i++) {
+        typItems.push(typInputs[i].innerHTML);
+        nckItems.push(nckInputs[i].value);
+        scaItems.push(scaInputs[i].value);
+        sctItems.push(sctInputs[i].value);
+        truItems.push(truInputs[i].value);
+        ntsItems.push(ntsInputs[i].value);
     }
 
-    removePriceRow();
+    var bnsPageData = { len: minElementsCount, typ: typItems, nck: nckItems, sca: scaItems, sct: sctItems, tru: truItems, nts: ntsItems };
+
+    //console.log(bnsPageData);
+    localStorage.setItem("bns", JSON.stringify(bnsPageData));
+}
+
+function globalLoadBNSPage() {
+    var bnsPageData = JSON.parse(localStorage.getItem("bns"));
+
+    //console.log(bnsPageData);
+
+    for(var i = 0; i < bnsPageData.len; i++) {
+        addBNSRow();
+
+        document.getElementsByClassName("bnsp-typ")[i].innerHTML = bnsPageData.typ[i]
+        document.getElementsByClassName("bnsp-nck")[i].value = bnsPageData.nck[i]
+        document.getElementsByClassName("bnsp-sca")[i].value = Number(bnsPageData.sca[i])
+        document.getElementsByClassName("bnsp-sct")[i].value = Number(bnsPageData.sct[i])
+        document.getElementsByClassName("bnsp-tru")[i].value = bnsPageData.tru[i]
+        document.getElementsByClassName("bnsp-nts")[i].value = bnsPageData.nts[i]
+    }
 }

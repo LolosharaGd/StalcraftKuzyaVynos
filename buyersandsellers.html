@@ -6,7 +6,7 @@
     <title>Кузя вынос!</title>
     <link rel="stylesheet" href="assets\css\style.css">
 </head>
-<body onload="addBNSRow()">
+<body onload="globalLoadBNSPage()">
     <header class="header">
         <nav class="nav">
             <a href="calculations.html" class="nav-item">Расчёты</a>
@@ -16,16 +16,20 @@
     </header>
 
     <div id="bns-page">
-        <div id="container">
+        <div id="container" oninput="globalSaveBNSPage()">
+            <div id="bns-type">
+                <p class="column-header">Тип</p>
+                <p class="column-header" id="last-typ">*</p>
+                <button class="normal-button" onclick="addBNSRow(); globalSaveBNSPage()">+</button>
+            </div>
             <div id="nicknames">
                 <p class="column-header">Ник</p>
                 <p class="column-header" id="last-nck">*</p>
-                <button class="normal-button" onclick="addBNSRow()">+</button>
+                <button class="normal-button" onclick="removeBNSRow(); globalSaveBNSPage()">-</button>
             </div>
             <div id="scam-attempts">
                 <p class="column-header">Попытки скама</p>
                 <p class="column-header" id="last-sca">*</p>
-                <button class="normal-button" onclick="removeBNSRow()">-</button>
             </div>
             <div id="succesful-trades">
                 <p class="column-header">Успеш. обмены</p>

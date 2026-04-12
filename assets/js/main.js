@@ -163,7 +163,7 @@ function calculateDivPage() {
     document.getElementById("total-sum").value = String(totalSum);
 
     var fee = Number(document.getElementById("fee").value);
-    var totalSumFee = totalSum * (100 - fee) / 100;
+    var totalSumFee = Math.round(totalSum * (100 - fee) / 100);
 
     document.getElementById("total-sum-fee").value = String(totalSumFee);
 
@@ -175,11 +175,11 @@ function calculateDivPage() {
     
     if(document.getElementById("divp-eqp").checked) {
         for(var i = 0; i < minPartsCount; i++) {
-            prtItems[i].value = Math.round(totalSumFee * 100 / minPartsCount) / 100
+            prtItems[i].value = Math.round(totalSumFee * 100 / minPartsCount / 100)
         }
     } else {
         for(var i = 0; i < minPartsCount; i++) {
-            prtItems[i].value = Math.round(totalSumFee * Number(prcItems[i].value)) / 100
+            prtItems[i].value = Math.round(totalSumFee * Number(prcItems[i].value) / 100)
         }
     }
 

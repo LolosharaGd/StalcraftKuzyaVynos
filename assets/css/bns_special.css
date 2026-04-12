@@ -1,0 +1,18 @@
+:root {
+    --normal-input-width: 100px;
+    --normal-input-height: 23px;
+    --checkbox-height: 22px; /* input-height - 1 */
+    --normal-input-hor-spacing: 101px;
+    --normal-input-bottom-margin: 2px;
+    --wide-input-width: 201px; /* input-width + hor-spacing */
+    --xwide-input-width: 302px; /* wide-input-width + hor-spacing */
+    --color-background: #03030a;
+    --color-light: #fafaf8;
+    --color-light-hovered: #d1d1d1;
+    --color-light-active: #a7a7a7;
+    --color-out-cell: rgb(241, 212, 212);
+}
+
+body {
+  font-size: 1.25rem;
+}

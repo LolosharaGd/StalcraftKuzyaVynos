@@ -43,7 +43,7 @@ img {
 }
 
 .header {
-    padding: 30px 60px;
+    padding: 10vh 1vw 2vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -124,4 +124,11 @@ img {
     display: flex;
     justify-content: center;
     align-content: center;
+}
+
+.mobile-warning {
+    color: var(--color-background);
+    font-size: 0px;
+    position: fixed;
+    bottom: 0;
 }

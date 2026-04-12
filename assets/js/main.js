@@ -96,7 +96,7 @@ function addBNSRow() {
 
     var newNckCell = document.createElement("input");
     newNckCell.type = "text";
-    newNckCell.className = "normal-in-cell bnsp-nck";
+    newNckCell.className = "normal-in-cell bnsp-nck small-text";
     newNckCell.value = "";
 
     var newScaCell = document.createElement("input");
@@ -116,7 +116,7 @@ function addBNSRow() {
 
     var newNtsCell = document.createElement("input");
     newNtsCell.type = "text";
-    newNtsCell.className = "wide-in-cell bnsp-nts";
+    newNtsCell.className = "wide-in-cell bnsp-nts small-text";
     newNtsCell.value = "";
 
     var lastTyp = document.getElementById("last-typ");

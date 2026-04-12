@@ -6,7 +6,7 @@
     <title>Кузя вынос!</title>
     <link rel="stylesheet" href="assets\css\style.css">
 </head>
-<body onload="addPriceRow()">
+<body onload="globalLoadDivPage()">
     <header class="header">
         <nav class="nav">
             <a href="calculations.html" class="nav-item">Расчёты</a>
@@ -14,6 +14,46 @@
             <a href="buyersandsellers.html" class="nav-item">Скупщики или продавцы</a>
         </nav>
     </header>
+    </div>
+
+    <div id="division-page">
+        <div id="container" oninput="globalSaveDivPage(); calculateDivPage()">
+            <div id="item-names-d">
+                <p class="column-header">Предмет</p>
+                <div class="column-header" id="last-itn"></div>
+                <button class="normal-button" onclick="addTotalRow(); globalSaveDivPage()">+</button>
+            </div>
+            <div id="profit">
+                <p class="column-header">Заработок</p>
+                <div class="column-header" id="last-prf"></div>
+                <button class="normal-button" onclick="removeTotalRow(); globalSaveDivPage()">-</button>
+            </div>
+            <div id="div-col-1">
+                <p class="column-header">Сумма</p>
+                <input class="normal-out-cell" id="total-sum" disabled>
+                <p class="column-header-xwide">Разделение на группу</p>
+                <p class="column-header">Доли</p>
+                <div class="column-header" id="last-prt"></div>
+                <button class="normal-button" onclick="addPartsRow(); globalSaveDivPage(); calculateDivPage()">+</button>
+            </div>
+            <div id="div-col-2">
+                <p class="column-header">Сумма + ком.</p>
+                <input class="normal-out-cell" id="total-sum-fee" disabled>
+                <div class="column-header"></div>
+                <p class="column-header">% от суммы</p>
+                <div class="column-header" id="last-prc"></div>
+                <button class="normal-button" onclick="removePartsRow(); globalSaveDivPage(); calculateDivPage()">-</button>
+            </div>
+            <div id="div-col-3">
+                <p class="column-header">Комиссия (%)</p>
+                <input class="normal-in-cell" id="fee">
+                <div class="column-header"></div>
+                <p class="column-header">Поровну</p>
+                <input type="checkbox" class="normal-in-cell checkbox" id="divp-eqp">
+                <p class="column-header">Сумма проц.</p>
+                <input type="text" class="normal-out-cell" id="perc-sum" disabled>
+            </div>
+        </div>
     </div>
 
     <script src="assets\js\main.js"></script>

@@ -1,3 +1,4 @@
+// Calculations
 function updatePrices() {
     var cppInputs = document.getElementsByClassName("calcp-cpp");
     var amtInputs = document.getElementsByClassName("calcp-amt");
@@ -40,8 +41,8 @@ function addPriceRow() {
 
     var newUsiCell = document.createElement("input");
     newUsiCell.type = "checkbox";
-    newUsiCell.className = "normal-in-cell calcp-usi";
-    newUsiCell.value = "false";
+    newUsiCell.className = "normal-in-cell calcp-usi checkbox";
+    newUsiCell.checked = false;
 
     var lastItn = document.getElementById("last-itn");
     var lastCpp = document.getElementById("last-cpp");
@@ -72,6 +73,7 @@ function removePriceRow() {
     document.getElementById("use-items").removeChild(usiInputs[usiInputs.length - 1]);
 }
 
+// Buyers and sellers
 function bnsTypeButtonSwitch(el) {
     if(el.innerHTML == "Скупщик") {
         el.innerHTML = "Продавец";
@@ -148,6 +150,102 @@ function removeBNSRow() {
     document.getElementById("notes").removeChild(ntsInputs[ntsInputs.length - 1]);
 }
 
+// Division
+function calculateDivPage() {
+    var prfItems = document.getElementsByClassName("divp-prf");
+
+    var totalSum = 0;
+
+    for(var i = 0; i < prfItems.length; i++) {
+        totalSum += Number(prfItems[i].value);
+    }
+
+    document.getElementById("total-sum").value = String(totalSum);
+
+    var fee = Number(document.getElementById("fee").value);
+    var totalSumFee = totalSum * (100 - fee) / 100;
+
+    document.getElementById("total-sum-fee").value = String(totalSumFee);
+
+    var prtItems = document.getElementsByClassName("divp-prt");
+    var prcItems = document.getElementsByClassName("divp-prc");
+
+    var minPartsCount = Math.min(prtItems.length, prcItems.length);
+
+    
+    if(document.getElementById("divp-eqp").checked) {
+        for(var i = 0; i < minPartsCount; i++) {
+            prtItems[i].value = Math.round(totalSumFee * 100 / minPartsCount) / 100
+        }
+    } else {
+        for(var i = 0; i < minPartsCount; i++) {
+            prtItems[i].value = Math.round(totalSumFee * Number(prcItems[i].value)) / 100
+        }
+    }
+
+    var percTotal = 0;
+
+    for(var i = 0; i < prcItems.length; i++) {
+        percTotal += Number(prcItems[i].value);
+    }
+
+    document.getElementById("perc-sum").value = percTotal;
+}
+
+function addTotalRow() {
+    var newItnCell = document.createElement("input");
+    newItnCell.type = "text";
+    newItnCell.className = "normal-in-cell divp-itn";
+    newItnCell.value = "";
+
+    var newPrfCell = document.createElement("input");
+    newPrfCell.type = "text";
+    newPrfCell.className = "normal-in-cell divp-prf";
+    newPrfCell.value = "";
+
+    var lastItn = document.getElementById("last-itn");
+    var lastPrf = document.getElementById("last-prf");
+    
+    document.getElementById("item-names-d").insertBefore(newItnCell, lastItn);
+    document.getElementById("profit").insertBefore(newPrfCell, lastPrf);
+}
+
+function removeTotalRow() {
+    var itnInputs = document.getElementsByClassName("divp-itn");
+    var prfInputs = document.getElementsByClassName("divp-prf");
+
+    document.getElementById("item-names-d").removeChild(itnInputs[itnInputs.length - 1]);
+    document.getElementById("profit").removeChild(prfInputs[prfInputs.length - 1]);
+}
+
+function addPartsRow() {
+    var newPrtCell = document.createElement("input");
+    newPrtCell.type = "text";
+    newPrtCell.className = "normal-out-cell divp-prt";
+    newPrtCell.value = "";
+    newPrtCell.disabled = true;
+
+    var newPrcCell = document.createElement("input");
+    newPrcCell.type = "text";
+    newPrcCell.className = "normal-in-cell divp-prc";
+    newPrcCell.value = "";
+
+    var lastPrt = document.getElementById("last-prt");
+    var lastPrc = document.getElementById("last-prc");
+    
+    document.getElementById("div-col-1").insertBefore(newPrtCell, lastPrt);
+    document.getElementById("div-col-2").insertBefore(newPrcCell, lastPrc);
+}
+
+function removePartsRow() {
+    var prtInputs = document.getElementsByClassName("divp-prt");
+    var prcInputs = document.getElementsByClassName("divp-prc");
+
+    document.getElementById("div-col-1").removeChild(prtInputs[prtInputs.length - 1]);
+    document.getElementById("div-col-2").removeChild(prcInputs[prcInputs.length - 1]);
+}
+
+// Save and load
 function globalSaveCalcPage() {
     var itnInputs = document.getElementsByClassName("calcp-itn");
     var cppInputs = document.getElementsByClassName("calcp-cpp");
@@ -236,4 +334,58 @@ function globalLoadBNSPage() {
         document.getElementsByClassName("bnsp-tru")[i].value = bnsPageData.tru[i]
         document.getElementsByClassName("bnsp-nts")[i].value = bnsPageData.nts[i]
     }
+}
+
+function globalSaveDivPage() {
+    var itnInputs = document.getElementsByClassName("divp-itn");
+    var prfInputs = document.getElementsByClassName("divp-prf");
+    var prcInputs = document.getElementsByClassName("divp-prc");
+
+    var minElementsCountT = Math.min(itnInputs.length, prfInputs.length);
+    var minElementsCountP = Math.min(prcInputs.length);
+
+    var itnItems = [];
+    var prfItems = [];
+    var prcItems = [];
+
+    for(var i = 0; i < minElementsCountT; i++) {
+        itnItems.push(itnInputs[i].value);
+        prfItems.push(prfInputs[i].value);
+    }
+
+    for(var i = 0; i < minElementsCountP; i++) {
+        prcItems.push(prcInputs[i].value);
+    }
+
+    var equalChecked = document.getElementById("divp-eqp").checked;
+    var fee = document.getElementById("fee").value;
+
+    var divPageData = { len_t: minElementsCountT, len_p: minElementsCountP, itn: itnItems, prf: prfItems, prc: prcItems, eqp: equalChecked, fee: fee };
+
+    console.log(divPageData);
+    localStorage.setItem("div", JSON.stringify(divPageData));
+}
+
+function globalLoadDivPage() {
+    var divPageData = JSON.parse(localStorage.getItem("div"));
+
+    console.log(divPageData);
+
+    for(var i = 0; i < divPageData.len_t; i++) {
+        addTotalRow();
+
+        document.getElementsByClassName("divp-itn")[i].value = divPageData.itn[i]
+        document.getElementsByClassName("divp-prf")[i].value = divPageData.prf[i]
+    }
+
+    for(var i = 0; i < divPageData.len_p; i++) {
+        addPartsRow();
+
+        document.getElementsByClassName("divp-prc")[i].value = divPageData.prc[i]
+    }
+
+    document.getElementById("divp-eqp").checked = Boolean(divPageData.eqp);
+    document.getElementById("fee").value = divPageData.fee;
+
+    calculateDivPage();
 }

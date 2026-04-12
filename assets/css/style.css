@@ -2,10 +2,12 @@
 
 :root {
     --normal-input-width: 150px;
-    --normal-input-height: 22px;
+    --normal-input-height: 23px;
+    --checkbox-height: 22px; /* input-height - 1 */
     --normal-input-hor-spacing: 151px;
-    --normal-input-bottom-margin: 3px;
-    --wide-input-width: 301px;
+    --normal-input-bottom-margin: 2px;
+    --wide-input-width: 301px; /* input-width + hor-spacing */
+    --xwide-input-width: 452px; /* wide-input-width + hor-spacing */
     --color-background: #03030a;
     --color-light: #fafaf8;
     --color-light-hovered: #d1d1d1;
@@ -55,7 +57,7 @@ img {
     }
 }
 
-.normal-button, .normal-in-cell, .normal-out-cell, .wide-in-cell {
+.normal-button, .normal-in-cell, .normal-out-cell, .wide-in-cell, .xwide-in-cell {
     background-color: var(--color-light);
     width: var(--normal-input-width);
     height: var(--normal-input-height);
@@ -72,7 +74,7 @@ img {
 }
 
 .normal-button {
-   font-weight: 800;
+    font-weight: 800;
 }
 
 .normal-button:hover {
@@ -87,14 +89,24 @@ img {
     width: var(--wide-input-width);
 }
 
+.xwide-in-cell {
+    width: var(--xwide-input-width);
+}
+
+.checkbox {
+    height: 22px;
+}
+
 #container {
     display: grid;
     grid: 0 / auto-flow var(--normal-input-hor-spacing);
 }
 
-.column-header, .column-header-wide {
+.column-header, .column-header-wide, .column-header-xwide {
     color: var(--color-light);
     width: var(--normal-input-width);
+    height: var(--normal-input-height);
+    margin-bottom: var(--normal-input-bottom-margin);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -104,7 +116,11 @@ img {
     width: var(--wide-input-width);
 }
 
-#calculations-page, #bns-page {
+.column-header-xwide {
+    width: var(--xwide-input-width);
+}
+
+#homepage, #calculations-page, #division-page, #bns-page {
     display: flex;
     justify-content: center;
     align-content: center;

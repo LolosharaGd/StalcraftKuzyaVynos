@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-
 :root {
     --normal-input-width: 19vw; /* 20px = 1vw*/
     --normal-input-height: 23px;
@@ -8,128 +6,21 @@
     --normal-input-bottom-margin: 2px;
     --wide-input-width: 38.5vw; /* input-width + hor-spacing */
     --xwide-input-width: 58vw; /* wide-input-width + hor-spacing */
-    --color-background: #03030a;
-    --color-light: #fafaf8;
-    --color-light-hovered: #d1d1d1;
-    --color-light-active: #a7a7a7;
-    --color-out-cell: rgb(241, 212, 212);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    font-size: 62.5%;
 }
 
 body {
-  font-family: "Roboto", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
   font-size: 1.3rem;
-  background-color: var(--color-background);
-}
-
-a {
-    text-decoration: none;
-    color: var(--color-light);
-}
-
-img {
-    max-width: 100%;
-}
-
-.header {
-    padding: 10vh 1vw 2vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .nav-item {
     padding: 0 2vw;
-    
-    &:hover {
-        text-decoration: underline;
-    }
-}
-
-.normal-button, .normal-in-cell, .normal-out-cell, .wide-in-cell, .xwide-in-cell {
-    background-color: var(--color-light);
-    width: var(--normal-input-width);
-    height: var(--normal-input-height);
-    border-radius: 0;
-    border: 0;
-    text-align: center;
-    color: var(--color-background);
-    margin-bottom: var(--normal-input-bottom-margin);
-    font-size: 1.4rem;
-}
-
-.normal-out-cell {
-    background-color: var(--color-out-cell);
-}
-
-.normal-button {
-    font-weight: 800;
-}
-
-.normal-button:hover {
-    background-color: var(--color-light-hovered);
-}
-
-.normal-button:active {
-    background-color: var(--color-light-active);
-}
-
-.wide-in-cell {
-    width: var(--wide-input-width);
-}
-
-.xwide-in-cell {
-    width: var(--xwide-input-width);
-}
-
-.checkbox {
-    height: var(--checkbox-height);
 }
 
 .small-text {
     font-size: 1rem;
 }
 
-#container {
-    display: grid;
-    grid: 0 / auto-flow var(--normal-input-hor-spacing);
-}
-
-.column-header, .column-header-wide, .column-header-xwide {
-    color: var(--color-light);
-    width: var(--normal-input-width);
-    height: var(--normal-input-height);
-    margin-bottom: var(--normal-input-bottom-margin);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.column-header-wide {
-    width: var(--wide-input-width);
-}
-
-.column-header-xwide {
-    width: var(--xwide-input-width);
-}
-
-#homepage, #calculations-page, #division-page, #bns-page {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-}
-
 .mobile-warning {
     color: red;
+    font-size: 4rem;
 }

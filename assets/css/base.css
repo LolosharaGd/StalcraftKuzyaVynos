@@ -120,7 +120,7 @@ img {
     width: var(--xwide-input-width);
 }
 
-#homepage, #calculations-page, #division-page, #bns-page {
+#homepage, #calculations-page, #division-page, #bns-page, #contest-page {
     display: flex;
     justify-content: center;
     align-content: center;
@@ -129,6 +129,4 @@ img {
 .mobile-warning {
     color: var(--color-background);
     font-size: 0px;
-    position: fixed;
-    bottom: 0;
 }

@@ -35,7 +35,7 @@ function addPriceRow() {
     newAmtCell.value = "0";
     
     var newPriCell = document.createElement("input");
-    newPriCell.disabled = "true";
+    newPriCell.disabled = true;
     newPriCell.className = "normal-out-cell calcp-pri";
     newPriCell.value = "0";
 
@@ -83,9 +83,10 @@ function bnsTypeButtonSwitch(el) {
 }
 
 function addBNSRow() {
+    var typCells = document.getElementsByClassName("bnsp-typ");
     var newTypCell = document.createElement("button");
     newTypCell.className = "normal-button bnsp-typ";
-    newTypCell.innerHTML = "Скупщик"
+    newTypCell.innerHTML = typCells.length == 0 ? "Скупщик" : typCells[typCells.length - 1].innerHTML;
     newTypCell.addEventListener(
         "click",
         function() {
@@ -245,6 +246,108 @@ function removePartsRow() {
     document.getElementById("div-col-2").removeChild(prcInputs[prcInputs.length - 1]);
 }
 
+// Contest
+function sortContestants() {
+    var nckInputs = document.getElementsByClassName("conp-nck");
+    var inpInputs = document.getElementsByClassName("conp-inp");
+
+    var contestants = [];
+
+    for(var i = 0; i < Math.min(nckInputs.length, inpInputs.length); i++) {
+        contestants.push({nck: nckInputs[i].value, inp: inpInputs[i].value});
+    }
+
+    contestants.sort((a, b) => b.inp - a.inp);
+
+    for(var i = 0; i < contestants.length; i++) {
+        nckInputs[i].value = contestants[i].nck;
+        inpInputs[i].value = contestants[i].inp;
+    }
+
+    calculateConPage();
+}
+
+function calculateConPage() {
+    var inpInputs = document.getElementsByClassName("conp-inp");
+    var ptbInputs = document.getElementsByClassName("conp-ptb");
+    var pfbInputs = document.getElementsByClassName("conp-pfb");
+    var ttlOutputs = document.getElementsByClassName("conp-ttl");
+
+    var totalBonus = 0;
+    var totalPfbSum = 0;
+
+    var minElementsCount = Math.min(inpInputs.length, ptbInputs.length, pfbInputs.length, ttlOutputs.length);
+
+    for(var i = 0; i < minElementsCount; i++) {
+        totalBonus += Math.round(Number(inpInputs[i].value) * Number(ptbInputs[i].value) / 100);
+        totalPfbSum += Number(pfbInputs[i].value);
+    }
+
+    for(var i = 0; i < minElementsCount; i++) {
+        ttlOutputs[i].value = Math.round(
+            (Number(inpInputs[i].value) * (100 - Number(ptbInputs[i].value)) / 100) + (totalBonus * Number(pfbInputs[i].value) / 100)
+        );
+    }
+
+    document.getElementById("total-bonus").value = totalBonus;
+    document.getElementById("perc-sum").value = totalPfbSum;
+}
+
+function addContestRow() {
+    var newNckCell = document.createElement("input");
+    newNckCell.type = "text";
+    newNckCell.className = "normal-in-cell conp-nck";
+    newNckCell.value = "";
+
+    var newInpCell = document.createElement("input");
+    newInpCell.type = "text";
+    newInpCell.className = "normal-in-cell conp-inp";
+    newInpCell.value = "0";
+
+    var ptbCells = document.getElementsByClassName("conp-ptb");
+    var newPtbCell = document.createElement("input");
+    newPtbCell.type = "text";
+    newPtbCell.className = "normal-in-cell conp-ptb";
+    newPtbCell.value = ptbCells.length == 0 ? "0" : ptbCells[ptbCells.length - 1].value;
+
+    var newPfbCell = document.createElement("input");
+    newPfbCell.type = "text";
+    newPfbCell.className = "normal-in-cell conp-pfb";
+    newPfbCell.value = "0";
+
+    var newTtlCell = document.createElement("input");
+    newTtlCell.type = "text";
+    newTtlCell.disabled = true;
+    newTtlCell.className = "normal-out-cell conp-ttl";
+    newTtlCell.value = "0";
+
+    var lastNck = document.getElementById("last-nck");
+    var lastInp = document.getElementById("last-inp");
+    var lastPtb = document.getElementById("last-ptb");
+    var lastPfb = document.getElementById("last-pfb");
+    var lastTtl = document.getElementById("last-ttl");
+    
+    document.getElementById("nicknames").insertBefore(newNckCell, lastNck);
+    document.getElementById("inputs").insertBefore(newInpCell, lastInp);
+    document.getElementById("perc-into-bonus").insertBefore(newPtbCell, lastPtb);
+    document.getElementById("perc-from-bonus").insertBefore(newPfbCell, lastPfb);
+    document.getElementById("total").insertBefore(newTtlCell, lastTtl);
+}
+
+function removeContestRow() {
+    var nicknames = document.getElementsByClassName("conp-nck");
+    var inpInputs = document.getElementsByClassName("conp-inp");
+    var ptbInputs = document.getElementsByClassName("conp-ptb");
+    var pfbInputs = document.getElementsByClassName("conp-pfb");
+    var ttlInputs = document.getElementsByClassName("conp-ttl");
+
+    document.getElementById("nicknames").removeChild(nicknames[nicknames.length - 1]);
+    document.getElementById("inputs").removeChild(inpInputs[inpInputs.length - 1]);
+    document.getElementById("perc-into-bonus").removeChild(ptbInputs[ptbInputs.length - 1]);
+    document.getElementById("perc-from-bonus").removeChild(pfbInputs[pfbInputs.length - 1]);
+    document.getElementById("total").removeChild(ttlInputs[ttlInputs.length - 1]);
+}
+
 // Save and load
 function globalSaveCalcPage() {
     var itnInputs = document.getElementsByClassName("calcp-itn");
@@ -362,14 +465,14 @@ function globalSaveDivPage() {
 
     var divPageData = { len_t: minElementsCountT, len_p: minElementsCountP, itn: itnItems, prf: prfItems, prc: prcItems, eqp: equalChecked, fee: fee };
 
-    console.log(divPageData);
+    // console.log(divPageData);
     localStorage.setItem("div", JSON.stringify(divPageData));
 }
 
 function globalLoadDivPage() {
     var divPageData = JSON.parse(localStorage.getItem("div"));
 
-    console.log(divPageData);
+    // console.log(divPageData);
 
     for(var i = 0; i < divPageData.len_t; i++) {
         addTotalRow();
@@ -388,4 +491,47 @@ function globalLoadDivPage() {
     document.getElementById("fee").value = divPageData.fee;
 
     calculateDivPage();
+}
+
+function globalSaveConPage() {
+    var nckInputs = document.getElementsByClassName("conp-nck");
+    var inpInputs = document.getElementsByClassName("conp-inp");
+    var ptbInputs = document.getElementsByClassName("conp-ptb");
+    var pfbInputs = document.getElementsByClassName("conp-pfb");
+
+    var minElementsCount = Math.min(nckInputs.length, inpInputs.length, ptbInputs.length, pfbInputs.length);
+
+    var nckItems = [];
+    var inpItems = [];
+    var ptbItems = [];
+    var pfbItems = [];
+
+    for(var i = 0; i < minElementsCount; i++) {
+        nckItems.push(nckInputs[i].value);
+        inpItems.push(inpInputs[i].value);
+        ptbItems.push(ptbInputs[i].value);
+        pfbItems.push(pfbInputs[i].value);
+    }
+
+    var conPageData = { len: minElementsCount, nck: nckItems, inp: inpItems, ptb: ptbItems, pfb: pfbItems };
+
+    // console.log(conPageData);
+    localStorage.setItem("con", JSON.stringify(conPageData));
+}
+
+function globalLoadConPage() {
+    var conPageData = JSON.parse(localStorage.getItem("con"));
+
+    // console.log(conPageData);
+
+    for(var i = 0; i < conPageData.len; i++) {
+        addContestRow();
+
+        document.getElementsByClassName("conp-nck")[i].value = conPageData.nck[i]
+        document.getElementsByClassName("conp-inp")[i].value = conPageData.inp[i]
+        document.getElementsByClassName("conp-ptb")[i].value = conPageData.ptb[i]
+        document.getElementsByClassName("conp-pfb")[i].value = conPageData.pfb[i]
+    }
+
+    calculateConPage();
 }

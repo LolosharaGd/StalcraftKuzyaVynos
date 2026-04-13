@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кузя вынос!</title>
+    <link rel="stylesheet" href="assets\css\base.css">
+    <link rel="stylesheet" media="screen and (max-width: 767px)" href="assets\css\mobile.css">
+</head>
+<body onload="globalLoadConPage()">
+    <header class="header">
+        <nav class="nav">
+            <a href="calculations.html" class="nav-item">Расчёты</a>
+            <a href="division.html" class="nav-item">Подсчёт и разделение</a>
+            <a href="buyersandsellers.html" class="nav-item">Скупщики или продавцы</a>
+            <a href="contest.html" class="nav-item small-text">Конкурсы</a>
+        </nav>
+    </header>
+
+    <div id="contest-page">
+        <div id="container" oninput="calculateConPage(); globalSaveConPage()">
+            <div id="nicknames">
+                <p class="column-header">Ник</p>
+                <div class="column-header" id="last-nck"></div>
+                <button class="normal-button" onclick="addContestRow(); globalSaveConPage()">+</button>
+                <button class="normal-button" onclick="sortContestants(); globalSaveConPage()">Сортировать</button>
+            </div>
+            <div id="inputs">
+                <p class="column-header">Вложение</p>
+                <div class="column-header" id="last-inp"></div>
+                <button class="normal-button" onclick="removeContestRow(); globalSaveConPage()">-</button>
+            </div>
+            <div id="perc-into-bonus">
+                <p class="column-header">% в бонус</p>
+                <div class="column-header" id="last-ptb"></div>
+                <p class="column-header">Итог. бонус</p>
+                <input type="text" class="normal-out-cell" id="total-bonus" disabled>
+            </div>
+            <div id="perc-from-bonus">
+                <p class="column-header">% от бонуса</p>
+                <div class="column-header" id="last-pfb"></div>
+                <p class="column-header">Сумма проц.</p>
+                <input type="text" class="normal-out-cell" id="perc-sum" disabled>
+            </div>
+            <div id="total">
+                <p class="column-header">Итог</p>
+                <div class="column-header" id="last-ttl"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets\js\main.js"></script>
+</body>
+</html>
